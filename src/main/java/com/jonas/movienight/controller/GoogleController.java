@@ -51,7 +51,6 @@ public class GoogleController {
     @PostMapping("/storeauthcode")
     public String storeauthcode(@RequestBody String code, @RequestHeader("X-Requested-With") String encoding) {
         if (encoding == null || encoding.isEmpty()) {
-            // Without the `X-Requested-With` header, this request could be forged. Aborts.
             return "Error, wrong headers";
         }
 
@@ -65,7 +64,6 @@ public class GoogleController {
                     CLIENT_ID,
                     CLIENT_SECRET,
                     code,
-                    // nodehill.com blog auto-converts non https-strings to https, thus the concatenation.
                     "http://localhost:8080")
                     .execute();
         } catch (IOException e) {
