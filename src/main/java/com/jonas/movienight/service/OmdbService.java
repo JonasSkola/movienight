@@ -44,7 +44,6 @@ public class OmdbService {
             movieEntity = restTemplate
                     .getForObject("http://www.omdbapi.com/?i=" + id + "&apikey=7f951636", MovieEntity.class);
             if (movieEntity != null && movieEntity.getId() != null) {
-                System.out.println(movieEntity.getId());
                 logger.info("Found movie with ID: [{}] from omdb API, saving to database.", id);
                 movieEntityRepository.save(movieEntity);
                 return modelMapper.map(movieEntity, MovieDto.class);

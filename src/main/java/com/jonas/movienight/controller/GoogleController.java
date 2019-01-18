@@ -18,6 +18,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,11 +51,13 @@ public class GoogleController {
     }
 
     @PostMapping("/storeauthcode")
-    public String storeauthcode(@RequestBody String code, @RequestHeader("X-Requested-With") String encoding) {
+    public String storeauthcode(Authentication authentication, @RequestBody String code,
+                                @RequestHeader("X-Requested-With") String encoding) {
         if (encoding == null || encoding.isEmpty()) {
             return "Error, wrong headers";
         }
 
+        String username = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
         GoogleTokenResponse tokenResponse = null;
         try {
@@ -70,22 +74,17 @@ public class GoogleController {
             e.printStackTrace();
         }
 
-        String email = null;
-        try {
-            email = tokenResponse.parseIdToken().getPayload().getEmail();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        UserEntity userEntity = userRepository.findByEmail(email);
+        UserEntity userEntity = userRepository.findByUsername(username);
+
 
         String accessToken = tokenResponse.getAccessToken();
         String refreshToken = tokenResponse.getRefreshToken();
         Long expiresAt = System.currentTimeMillis() + (tokenResponse.getExpiresInSeconds() * 1000);
 
+
         if (userEntity == null) {
-            userEntity = new UserEntity();
-            userEntity.setEmail(email);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
         }
 
         userEntity.setAccessToken(accessToken);
@@ -151,10 +150,9 @@ public class GoogleController {
     private void updateAccessTokens() {
         List<UserEntity> userEntities = userRepository.findAll();
 
-        if(userEntities.size() == 0){
+        if (userEntities.size() == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No users in database");
         }
-
         userEntities.forEach(u -> {
             long expiresAt = u.getExpiresAt();
             long currentTime = System.currentTimeMillis();
@@ -171,6 +169,7 @@ public class GoogleController {
 
     @GetMapping("/availibleTimes")
     public List<EventDto> getAvailibleTimes() {
+
         org.joda.time.DateTime now = new org.joda.time.DateTime();
         List<Event> takenTimes = getEvents();
         List<EventDto> availibleTimes = new ArrayList<>();
@@ -211,10 +210,10 @@ public class GoogleController {
     @ResponseStatus(HttpStatus.CREATED)
     public EventDto createEvent(@RequestBody EventDto eventDto) {
 
-        if (eventDto.getStartTime() == null || eventDto.getEndTime() == null || eventDto.getMovieName() == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event must contain start time, end time and movie name");
+        if (eventDto.getStartTime() == null || eventDto.getEndTime() == null || eventDto.getMovieName() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Event must contain start time, end time and movie name");
         }
-
 
         updateAccessTokens();
 
@@ -232,7 +231,6 @@ public class GoogleController {
                     new Calendar.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
                             .setApplicationName("Movie Nights")
                             .build();
-
             try {
                 calendar.events().insert(user.getEmail(), googleEvent).execute();
             } catch (IOException e) {
