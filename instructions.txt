@@ -1,0 +1,16 @@
+För att få log filen att fungera så kommer value="/home/jonas/IdeaProjects/movienight/logs" behövas bytas ut mot en giltig filväg för testarens dator.
+
+En user med namn och password "jonas" behövs ifall man inte vill byta ut
+spring.datasource.username=jonas
+spring.datasource.password=jonas
+mot en user som redan finns på ens MySQL server.
+Isåfall blir det:
+CREATE USER 'jonas'@'localhost' IDENTIFIED BY 'jonas';
+GRANT ALL PRIVILEGES ON *.* TO 'jonas'@'localhost';  (För ease of use, annars bara för databasen).
+
+Ifall man inte vill byta ut
+spring.jpa.hibernate.ddl-auto=update
+till Create så rekommenderar jag att skapa databasen innan.
+Den som används för applikationen heter movienighttest
+Så följande SQL:
+CREATE DATABASE movienighttest;
