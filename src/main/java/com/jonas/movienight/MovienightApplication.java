@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @SpringBootApplication
 public class MovienightApplication {
@@ -29,7 +30,7 @@ public class MovienightApplication {
         return new BCryptPasswordEncoder();
     }
 
-    /*@Bean
+    @Bean
     public CommonsRequestLoggingFilter requestLoggingFilter() {
         CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
         loggingFilter.setIncludeClientInfo(true);
@@ -37,7 +38,7 @@ public class MovienightApplication {
         loggingFilter.setIncludePayload(true);
         loggingFilter.setIncludeHeaders(false);
         return loggingFilter;
-    }*/
+    }
 
 }
 

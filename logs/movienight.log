@@ -1,0 +1,35 @@
+2019-01-18 15:01:29 - Starting MovienightApplication on jonas-ThinkPad-T470s with PID 25508 (/home/jonas/IdeaProjects/movienight/target/classes started by jonas in /home/jonas/IdeaProjects/movienight)
+2019-01-18 15:01:29 - No active profile set, falling back to default profiles: default
+2019-01-18 15:01:29 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-18 15:01:29 - Finished Spring Data repository scanning in 42ms. Found 2 repository interfaces.
+2019-01-18 15:01:30 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$608345c8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-18 15:01:30 - Tomcat initialized with port(s): 8080 (http)
+2019-01-18 15:01:30 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-01-18 15:01:30 - Starting service [Tomcat]
+2019-01-18 15:01:30 - Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-18 15:01:30 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib]
+2019-01-18 15:01:30 - Initializing Spring embedded WebApplicationContext
+2019-01-18 15:01:30 - Root WebApplicationContext: initialization completed in 1216 ms
+2019-01-18 15:01:30 - Filter 'requestLoggingFilter' configured for use
+2019-01-18 15:01:30 - HikariPool-1 - Starting...
+2019-01-18 15:01:30 - HikariPool-1 - Start completed.
+2019-01-18 15:01:30 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-18 15:01:30 - HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-18 15:01:30 - HHH000206: hibernate.properties not found
+2019-01-18 15:01:30 - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-18 15:01:30 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-18 15:01:31 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-18 15:01:31 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f365a26, org.springframework.security.web.context.SecurityContextPersistenceFilter@4f65af91, org.springframework.security.web.header.HeaderWriterFilter@61ca5134, org.springframework.security.web.authentication.logout.LogoutFilter@6db04a6, com.jonas.movienight.security.AuthenticationFilter@44a9971f, com.jonas.movienight.security.AuthorizationFilter@2e2cd42c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@8ee1404, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5cba474f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1cdad619, org.springframework.security.web.session.SessionManagementFilter@8636cf4, org.springframework.security.web.access.ExceptionTranslationFilter@34e9de8d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@35b58254]
+2019-01-18 15:01:31 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-18 15:01:31 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-18 15:01:31 - Adding welcome page: class path resource [static/index.html]
+2019-01-18 15:01:31 - Starting ProtocolHandler ["http-nio-8080"]
+2019-01-18 15:01:31 - Using a shared selector for servlet write/read
+2019-01-18 15:01:31 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-01-18 15:01:31 - Started MovienightApplication in 2.981 seconds (JVM running for 3.721)
+2019-01-18 15:02:42 - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-18 15:02:42 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-18 15:02:42 - HikariPool-1 - Shutdown initiated...
+2019-01-18 15:02:42 - HikariPool-1 - Shutdown completed.

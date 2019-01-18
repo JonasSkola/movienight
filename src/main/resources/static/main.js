@@ -54,8 +54,7 @@ $('#registerForm').submit(function (e) {
         data: JSON.stringify({
             username: $("#usernameReg").val(),
             password: $("#passwordReg").val(),
-            confirmPassword: $("#confirmPassword").val(),
-            email: $("#email").val(),
+            confirmPassword: $("#confirmPassword").val()
 
         }),
         contentType: 'application/json',

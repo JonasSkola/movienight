@@ -59,6 +59,12 @@ public class GoogleController {
 
         String username = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
+        if (username == null || username.equals("anonymousUser")){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        System.out.println(username);
+
         GoogleTokenResponse tokenResponse = null;
         try {
             tokenResponse = new GoogleAuthorizationCodeTokenRequest(
@@ -74,6 +80,12 @@ public class GoogleController {
             e.printStackTrace();
         }
 
+        String email = null;
+        try {
+            email = tokenResponse.parseIdToken().getPayload().getEmail();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         UserEntity userEntity = userRepository.findByUsername(username);
 
@@ -87,6 +99,7 @@ public class GoogleController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
         }
 
+        userEntity.setEmail(email);
         userEntity.setAccessToken(accessToken);
         userEntity.setRefreshToken(refreshToken);
         userEntity.setExpiresAt(expiresAt);

@@ -42,14 +42,42 @@
     <label for="confirmPassword">Password</label>
     <input type="text" id="confirmPassword" placeholder="confirm password" />
 
-    <label for="email">Email</label>
-    <input type="text" id="email" placeholder="email" />
-
     <input type="submit" id="register" value="Register"/>
 
 
 </form>
 
 <button id="signinButton">Link my Google Calendar</button>
+
+
+
+<p>
+    HTTPS:
+    <br>
+    Hypertext Transfer Protocol Secure is the secure version of HTTP, which is the protocol over which data is sent between a persons browser and the website.
+    Data sent through HTTPS gets encrypted to make it more secure.
+    If the data is not encrypted, passwords and other sensitive data will be sent in plaintext.
+    <br>
+    JWT:
+    <br>
+    JSON webtokens is a way for the client to authenticate to the server. A JWT consists of a header, a payload and a signature.
+    The header consists usually of 2 fields, that it is a JWT and the signing algorithm that's used.
+    The payload consists of information about the user.
+    The signature consists of the header, the payload and a secret, which is then hashed. The secret is supposed to only live on the server which makes it very secure.
+    It's is practically impossible to dehash a token without knowing the secret.
+    <br>
+Oauth2:
+    <br>
+    Oauth2 allows third party applications, such as facebook or google to grant access to some of its features and information (not passwords) to
+    HTTP services. If you're using Oauth2 you can more or less skip creating an authentication provider of your own.
+    When you create a google service you're provided with a secret and clientId, which the server then uses to connect to your oauth2 service.
+    <br>
+</p>
+
+
+
+
+
+
 </body>
 </html>
